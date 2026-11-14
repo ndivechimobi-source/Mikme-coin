@@ -1,0 +1,34 @@
+<!doctype html>
+<html lang="en"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#080807"><title>MIKME COINS — MKC Mining</title>
+<script src="https://telegram.org/js/telegram-web-app.js"></script>
+<style>
+*{box-sizing:border-box}body{margin:0;background:#050505;color:#fff;font-family:Arial,sans-serif}
+.app{max-width:520px;min-height:100vh;margin:auto;padding:22px 18px;background:radial-gradient(ellipse at 50% 48%,#30200b,#100d08 45%,#050505 75%)}
+.top,.user,.stats,.nav{display:flex;justify-content:space-between;align-items:center;gap:12px}.top{margin:8px 0 30px}
+.brand{color:#f5c451;font-weight:bold;letter-spacing:2px}.wallet{border:1px solid #76551e;border-radius:22px;padding:10px;color:#f5c451}
+.user{justify-content:flex-start;color:#d9d2c4}.avatar{font-size:30px}.balance{text-align:center;font-size:42px;font-weight:bold;margin-top:25px}.balance span{color:#f5c451}
+.sub{text-align:center;color:#35c58d;margin:8px 0 25px}.reward{display:inline-block;padding:10px 14px;border:1px solid #76551e;border-radius:14px;color:#ffdf83}
+.coin-wrap{display:grid;place-items:center;padding:45px 0}.coin{width:250px;height:250px;border-radius:50%;display:flex;flex-direction:column;align-items:center;justify-content:center;color:#241500;background:radial-gradient(circle at 35% 25%,#ffe69a,#d89b20 45%,#5a3507 80%);border:10px solid #b98628;box-shadow:0 0 35px #e4a52a66,inset 0 0 0 5px #ffe9a1}.coin b{font-size:42px}.crown{font-size:42px}
+.tap{width:100%;padding:17px;border-radius:30px;border:1px solid #e5b84b;background:linear-gradient(110deg,#3a290b,#171108);color:#ffe19a;font-size:18px;font-weight:bold}
+.stats{margin:16px 0}.stat{flex:1;text-align:center;padding:15px 5px;border:1px solid #5b4823;border-radius:14px;background:#0d0c09}.stat small{display:block;color:#a49b89;margin-top:5px}
+.progress{height:9px;background:#29251d;border-radius:9px;overflow:hidden;margin:10px 0 25px}.bar{height:100%;width:100%;background:#f5c451}
+.nav{border-top:1px solid #29231a;padding-top:16px;color:#f5c451}.nav span{text-align:center;flex:1;font-size:13px}.nav b{display:block;font-size:22px;margin-bottom:5px}
+.note{text-align:center;color:#8d877a;font-size:11px;line-height:1.5;margin-top:20px}
+</style></head><body><main class="app">
+<header class="top"><div class="brand">♛ MIKME COINS<br><small>MKC MINING</small></div><div class="wallet">◎ WALLET</div></header>
+<section class="user"><div class="avatar">👽</div><div><strong id="username">MIKME Miner</strong><br><small>Welcome to the mining club</small></div></section>
+<div class="balance"><span id="balance">0</span> <span>MKC</span></div><div class="sub">Your total mined coins</div><div class="reward">🎁 Daily rewards</div>
+<section class="coin-wrap"><div class="coin"><div class="crown">♛</div><b>MKC</b><small>MIKME COINS</small></div></section>
+<button class="tap" id="tap">👆 TAP TO MINE</button>
+<section class="stats"><div class="stat"><strong>⚡ <span id="energy">1000</span>/1000</strong><small>ENERGY</small></div><div class="stat"><strong>⌛ 24:00:00</strong><small>DAILY MINING CYCLE</small></div></section>
+<div class="progress"><div class="bar" id="bar"></div></div>
+<nav class="nav"><span><b>👥</b>Refer</span><span><b>☑️</b>Tasks</span><span><b>🪙</b>Tap</span><span><b>👛</b>Wallet</span></nav>
+<p class="note">Demo only: MKC points are stored on this device. They are not cryptocurrency or withdrawable funds yet.</p>
+</main><script>
+const tg=window.Telegram?.WebApp;if(tg){tg.ready();tg.expand();document.getElementById('username').textContent=tg.initDataUnsafe?.user?.first_name||'MIKME Miner'}
+let balance=+(localStorage.getItem('mkc_demo_balance')||0),energy=+(localStorage.getItem('mkc_demo_energy')||1000);
+function render(){document.getElementById('balance').textContent=balance.toLocaleString();document.getElementById('energy').textContent=energy;document.getElementById('bar').style.width=energy/10+'%'}
+document.getElementById('tap').onclick=()=>{if(energy>0){balance++;energy--;localStorage.setItem('mkc_demo_balance',balance);localStorage.setItem('mkc_demo_energy',energy);render()}else alert('Energy finished — come back later')};render();
+</script></body></html>
